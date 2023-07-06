@@ -15,7 +15,7 @@ type AppointmentWithUser = Prisma.AppointmentGetPayload<{
 }>
 
 
-const DatesPage = (props:{appointments: AppointmentWithUser[]}) => {
+const DatesPage = (props:{appointments?: AppointmentWithUser[]}) => {
     var today = new Date().toDateString();
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false);

@@ -28,7 +28,7 @@ const Users = async ({ params }: { params: { id: string } }) => {
     }
 
 
-
+    
   return (
     <>
         <div className="z-10 w-full max-w-xl px-5 xl:px-0" >
@@ -36,13 +36,15 @@ const Users = async ({ params }: { params: { id: string } }) => {
                 Uživatelé
             </h1><form>
             <button 
+                /* eslint-disable */
                 formAction={makeNew}
+                /* eslint-enable */
                 className="flex h-10 w-full p-2 m-2 items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 focus:outline-none`}"
             >Vytvořit nového uživatele</button></form>
             <UserGrid users={users} handleClick={`/admin/dates/${params.id}`}/>
         </div>
     </>
-  )
+  ) 
 }
 
 
