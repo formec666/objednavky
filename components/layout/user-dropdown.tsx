@@ -6,11 +6,11 @@ import { LayoutDashboard, LogOut } from "lucide-react";
 import Popover from "@/components/shared/popover";
 import Image from "next/image";
 import { Session } from "next-auth";
+import Link from "next/link";
 
 export default function UserDropdown({ session }: { session: Session }) {
   const { email, image } = session?.user || {};
   const [openPopover, setOpenPopover] = useState(false);
-
   if (!email) return null;
 
   return (
@@ -25,19 +25,19 @@ export default function UserDropdown({ session }: { session: Session }) {
               <LayoutDashboard className="h-4 w-4" />
               <p className="text-sm">Dashboard</p>
             </Link> */}
-            <button
-              className="relative flex w-full cursor-not-allowed items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
-              disabled
+            <Link
+              className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
+              href='/users/me'
             >
               <LayoutDashboard className="h-4 w-4" />
-              <p className="text-sm">Dashboard</p>
-            </button>
+              <p className="text-sm">O mě</p>
+            </Link>
             <button
               className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
               onClick={() => signOut()}
             >
               <LogOut className="h-4 w-4" />
-              <p className="text-sm">Logout</p>
+              <p className="text-sm">Odhlásit</p>
             </button>
           </div>
         }

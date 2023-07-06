@@ -5,6 +5,9 @@ const nextConfig = {
   images: {
     domains: ["lh3.googleusercontent.com", "vercel.com"],
   },
+  experimental: {
+    serverActions: true,
+  },
   async redirects() {
     return [
       {
