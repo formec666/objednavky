@@ -63,23 +63,5 @@ const Home = async (props:{user:UserInterface}) => {
   );
 }
 
-export async function getServerSideProps({res, req, params}: GetServerSidePropsContext){
-    console.log("-----------hello-------------")
-    const session = await getServerSession(req, res, authOptions);
-    if (session?.user?.email){
-      const user = await prisma.user.findUnique({where: {email: session.user.email}})
-      console.log(user);
-      if (user && user.isAdmin){
-        return {props: {
-          user: user
-        }}
-      }
-    }
-    return {
-      redirect:{
-        to: '/'
-      }
-    }
-}
 
 export default Home;
