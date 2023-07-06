@@ -17,7 +17,7 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { User as UserInterface } from "@prisma/client";
 import { redirect } from "next/navigation";
 
-const Home = async (props:{user:UserInterface}) => {
+const Home = async () => {
     const session = await getServerSession(authOptions);
     
     if (session?.user?.email){
