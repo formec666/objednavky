@@ -3,6 +3,7 @@ import DatesPage from '@/components/admin/dates_page'
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import React from 'react'
+import prisma from '@/lib/prisma';
 
 const page = async() => {
   const session = await getServerSession(authOptions);

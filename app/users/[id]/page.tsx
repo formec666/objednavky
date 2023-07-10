@@ -5,6 +5,7 @@ import { revalidatePath, revalidateTag } from 'next/cache';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import React from 'react';
+import prisma from '@/lib/prisma';
 
 const Page = async ({ params }: { params: { id: string } }) => {
     const session = await getServerSession(authOptions);
@@ -46,7 +47,12 @@ const Page = async ({ params }: { params: { id: string } }) => {
     <>
         
         <div className="z-10 w-full max-w-xl px-5 xl:px-0">
-            <BackLink/>    
+            <Link
+                href={'/admin/users'}
+                className="flex h-10 w-full p-2 m-2 items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 focus:outline-none`}"
+            >
+                Zpět
+            </Link>    
             <form className='flex flex-col' action={saveChanges}>
                 <label>Email</label>
                 <input defaultValue={user?.email||''} name={'email'} className="flex h-10 w-full p-2 m-2 items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 focus:outline-none`}"></input>
