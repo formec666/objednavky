@@ -1,27 +1,4 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import prisma from "@/lib/prisma";
-import GoogleProvider from "next-auth/providers/google";
-import EmailProvider from "next-auth/providers/email";
-
 import nodemailer from "nodemailer"
-
-export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    }),
-    EmailProvider({
-      server: process.env.EMAIL_SERVER,
-      from: process.env.EMAIL_FROM,
-    })
-  ],
-};
-
-const handler = NextAuth(authOptions);
-
 
 async function sendVerificationRequest({
   identifier: email,
@@ -68,7 +45,7 @@ function html({ url, host, email }: Record<"url" | "host" | "email", string>) {
   <table width="100%" border="0" cellspacing="20" cellpadding="0" style="background: ${mainBackgroundColor}; max-width: 600px; margin: auto; border-radius: 10px;">
     <tr>
       <td align="center" style="padding: 10px 0px 0px 0px; font-size: 18px; font-family: Helvetica, Arial, sans-serif; color: ${textColor};">
-        Přihlásit se jako <strong>${escapedEmail}</strong>
+        Sign in as <strong>${escapedEmail}</strong>
       </td>
     </tr>
     <tr>
@@ -82,7 +59,7 @@ function html({ url, host, email }: Record<"url" | "host" | "email", string>) {
     </tr>
     <tr>
       <td align="center" style="padding: 0px 0px 10px 0px; font-size: 16px; line-height: 22px; font-family: Helvetica, Arial, sans-serif; color: ${textColor};">
-        Jestli jste se nepokusili přihlásit, tento email můžete bezpečně ignorovat.
+        If you did not request this email you can safely ignore it.
       </td>
     </tr>
   </table>
@@ -92,7 +69,5 @@ function html({ url, host, email }: Record<"url" | "host" | "email", string>) {
 
 // Email Text body (fallback for email clients that don't render HTML, e.g. feature phones)
 function text({ url, host }: Record<"url" | "host", string>) {
-  return `Přihlásit se k  ${host}\n${url}\n\n`
+  return `Sign in to ${host}\n${url}\n\n`
 }
-
-export { handler as GET, handler as POST };
