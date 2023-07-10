@@ -57,7 +57,7 @@ dependencies:
     specifier: ^13.4.8
     version: 13.4.8(react-dom@18.2.0)(react@18.2.0)
   next-auth:
-    specifier: 4.22.1
+    specifier: ^4.22.1
     version: 4.22.1(next@13.4.8)(nodemailer@6.9.3)(react-dom@18.2.0)(react@18.2.0)
   nodemailer:
     specifier: ^6.9.3
@@ -97,6 +97,9 @@ devDependencies:
   '@types/ms':
     specifier: ^0.7.31
     version: 0.7.31
+  '@types/nodemailer':
+    specifier: ^6.4.8
+    version: 6.4.8
   autoprefixer:
     specifier: ^10.4.13
     version: 10.4.14(postcss@8.4.23)
@@ -809,7 +812,12 @@ packages:
 
   /@types/node@18.11.18:
     resolution: {integrity: sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==}
-    dev: false
+
+  /@types/nodemailer@6.4.8:
+    resolution: {integrity: sha512-oVsJSCkqViCn8/pEu2hfjwVO+Gb3e+eTWjg3PcjeFKRItfKpKwHphQqbYmPQrlMk+op7pNNWPbsJIEthpFN/OQ==}
+    dependencies:
+      '@types/node': 18.11.18
+    dev: true
 
   /@types/prop-types@15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
