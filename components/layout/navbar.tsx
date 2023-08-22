@@ -7,7 +7,7 @@ import { useSignInModal } from "./sign-in-modal";
 import UserDropdown from "./user-dropdown";
 import { Session } from "next-auth";
 
-export default function NavBar({ session }: { session: Session | null }) {
+export default function NavBar(props: { session: Session | null, isAdmin: boolean }) {
   const { SignInModal, setShowSignInModal } = useSignInModal();
   const scrolled = useScroll(50);
 
@@ -33,8 +33,8 @@ export default function NavBar({ session }: { session: Session | null }) {
             <p>Objednání</p>
           </Link>
           <div>
-            {session ? (
-              <UserDropdown session={session} />
+            {props.session ? (
+              <UserDropdown session={props.session} isAdmin = {props.isAdmin}/>
             ) : (
               <button
                 className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black"

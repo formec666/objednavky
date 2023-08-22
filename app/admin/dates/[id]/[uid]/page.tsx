@@ -4,6 +4,7 @@ import { randomInt } from 'crypto';
 import prisma from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 const Users = async ({ params }: { params: { id: string, uid: string } }) => {
     const session = await getServerSession(authOptions);
@@ -25,6 +26,7 @@ const Users = async ({ params }: { params: { id: string, uid: string } }) => {
         redirect(`/users/${deez.id}`);
     }
     const appointment = await prisma.appointment.update({where: {id: params.id}, data: {userId: params.uid}});
+    revalidatePath('/admin/dates');
     redirect('/admin/dates');
   
 }

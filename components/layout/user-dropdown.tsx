@@ -8,8 +8,8 @@ import Image from "next/image";
 import { Session } from "next-auth";
 import Link from "next/link";
 
-export default function UserDropdown({ session }: { session: Session }) {
-  const { email, image } = session?.user || {};
+export default function UserDropdown(props:  { session: Session, isAdmin: boolean }) {
+  const { email, image } = props.session?.user || {};
   const [openPopover, setOpenPopover] = useState(false);
   if (!email) return null;
 
@@ -25,6 +25,13 @@ export default function UserDropdown({ session }: { session: Session }) {
               <LayoutDashboard className="h-4 w-4" />
               <p className="text-sm">Dashboard</p>
             </Link> */}
+            {props.isAdmin && <Link
+              className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
+              href='/admin'
+            >
+              <LayoutDashboard className="h-4 w-4" />
+              <p className="text-sm">Administrace</p>
+            </Link>}
             <Link
               className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
               href='/users/me'

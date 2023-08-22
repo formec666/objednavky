@@ -6,16 +6,50 @@ import WebVitals from "@/components/home/web-vitals";
 import ComponentGrid from "@/components/home/component-grid";
 import Image from "next/image";
 import { nFormatter } from "@/lib/utils";
+import prisma from '@/lib/prisma';
+import Notifications from "@/components/home/notifications";
+import DayCard from "@/components/home/DayCard";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
+  const notifications = await prisma.notification.findMany();
+  const morning = new Date()
+  morning.setHours(0,0,0,0)
+  const evening = new Date(morning.getTime()-(-86400000))
+  const dates = await prisma.appointment.findMany({where:{
+    time:{
+      gte: morning.toISOString(),
+      lt: evening.toISOString()
+    },
+    userId: null
+  }})
+
+  console.log(dates);
+  const session = await getServerSession(authOptions);
+  const user = await prisma.user.findUnique({where:{email:session?.user?.email||undefined}})
   
+  if (user?.id && (!user.tel || !user.name)){
+      redirect('/users/'+user.id);
+  }
 
   return (
-    <div className="relative">
-        main page
+  <div>
+    <div className="relative flex flex-col items-start">
+      <Notifications notifications={notifications}/>
     </div>
+    {session?.user?<DayCard appointments={dates} morning={morning}/>:<DaysForbidden/>}
+    
+  </div>
       
   );
+}
+
+const DaysForbidden = () => {
+  return (
+    <>Pro objednání se přihlaste a vyplňte telefon a jméno</>
+  )
 }
 
 const features = [

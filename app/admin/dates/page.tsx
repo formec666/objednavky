@@ -17,7 +17,7 @@ const page = async() => {
     else{
       redirect('/');
     }
-    const appointments = await prisma?.appointment.findMany({include:{user:true}});
+    const appointments = await prisma?.appointment.findMany({include:{user:true}, orderBy: {time: 'asc'}});
   return (
         <DatesPage appointments={appointments}/>
     
