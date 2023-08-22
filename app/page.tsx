@@ -28,11 +28,14 @@ export default async function Home() {
 
   console.log(dates);
   const session = await getServerSession(authOptions);
-  const user = await prisma.user.findUnique({where:{email:session?.user?.email||undefined}})
+  if (session){
+    const user = await prisma.user.findUnique({where:{email:(session?.user?.email||undefined)}})
   
-  if (user?.id && (!user.tel || !user.name)){
-      redirect('/users/'+user.id);
+    if (user?.id && (!user.tel || !user.name)){
+        redirect('/users/'+user.id);
+    }
   }
+  
 
   return (
   <div>
@@ -48,7 +51,7 @@ export default async function Home() {
 
 const DaysForbidden = () => {
   return (
-    <>Pro objednání se přihlaste a vyplňte telefon a jméno</>
+    <div className="relative items-center text-3xl ">Pro objednání se přihlaste a vyplňte telefon a jméno</div>
   )
 }
 

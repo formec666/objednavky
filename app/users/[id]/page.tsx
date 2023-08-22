@@ -56,9 +56,9 @@ const Page = async ({ params }: { params: { id: string } }) => {
             <form className='flex flex-col' action={saveChanges}>
                 <label>Email</label>
                 <input defaultValue={user?.email||''} name={'email'} className="flex h-10 w-full p-2 m-2 items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 focus:outline-none`}"></input>
-                <label>Jméno</label>
+                <label>Jméno <span className='text-red-500'>(povinné)</span></label>
                 <input defaultValue={user?.name||''} name={'name'} className="flex h-10 w-full p-2 m-2 items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 focus:outline-none`}"></input>
-                <label>Telefon</label>
+                <label>Telefon <span className='text-red-500'>(povinné)</span></label>
                 <input defaultValue={user?.tel||''} name={'tel'}className="flex h-10 w-full p-2 m-2 items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 focus:outline-none`}"></input>
                 {current?.isAdmin &&
                     <>

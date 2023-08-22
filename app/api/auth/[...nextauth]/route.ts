@@ -40,7 +40,7 @@ async function sendVerificationRequest({
   await transport.sendMail({
     to: email,
     from,
-    subject: `Sign in to ${host}`,
+    subject: `Přihlášení k ${host}`,
     text: text({ url, host }),
     html: html({ url, host, email }),
   })
